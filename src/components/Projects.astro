@@ -5,81 +5,165 @@ import builddataDashboard from "../assets/img/builddata-dashboard.png";
 import tennisVr from "../assets/img/tennis-vr.png";
 import planify from "../assets/img/planify.png";
 
-const sizes = "(max-width: 900px) 100vw, 720px";
-const widths = [480, 720];
+// Para editar un proyecto, cambiá sus datos acá.
+const projects = [
+  {
+    id: "builddata",
+    title: "BuildData",
+    year: 2026,
+    meta: "5to año · 2026 · Plataforma web + bot",
+    kind: "Plataforma web + bot",
+    color: "#4a6a87",
+    cover: builddataLanding,
+    images: [
+      { src: builddataLanding, alt: "Landing de BuildData" },
+      { src: builddataDashboard, alt: "Dashboard de BuildData" },
+    ],
+    about:
+      "Gestión de obras en construcción. El equipo manda audios, fotos y mensajes por WhatsApp, y BuildData los convierte en datos ordenados en un dashboard.",
+    role: "Hice el backend con Node.js, Express y Supabase: la parte que recibe lo que el equipo manda por WhatsApp y lo transforma en datos ordenados para el dashboard.",
+    achievements: [
+      "4° puesto entre 127 alumnos en el workshop de herramientas de IA de Gemini Academy.",
+      "MVP Experience: participé con mi equipo presentando el proyecto frente a inversores y profesionales de la industria.",
+    ],
+    tags: ["Backend", "Node.js", "Express", "Supabase"],
+    link: { href: "https://github.com/facujarma/BuildData", text: "Ver el repositorio" },
+  },
+  {
+    id: "tennis-vr",
+    title: "Tennis VR",
+    year: 2025,
+    meta: "4to año · 2025 · Realidad virtual",
+    kind: "Realidad virtual",
+    color: "#5b7151",
+    cover: tennisVr,
+    images: [{ src: tennisVr, alt: "Persona jugando Tennis VR con un visor Meta Quest" }],
+    about: "Un partido de tenis en realidad virtual, para jugar con el visor Meta Quest.",
+    role: "Hice el backend del juego.",
+    achievements: [
+      "TIC XP 2026: nos convocaron con mi equipo para presentarlo y acercar a chicos más chicos a la tecnología.",
+    ],
+    tags: ["Backend", "Meta Quest VR", "Videojuegos"],
+  },
+  {
+    id: "planify",
+    title: "Planify",
+    year: 2024,
+    meta: "3er año · 2024 · Web",
+    kind: "Web",
+    color: "#3a3c40",
+    cover: planify,
+    images: [{ src: planify, alt: "Pantalla principal de Planify" }],
+    about:
+      "Una web para encontrar tu plan ideal, filtrando por espacios abiertos o cerrados y por cuántas personas son.",
+    role: "Hice el backend de la web, incluidos los filtros por tipo de espacio y por cantidad de personas.",
+    achievements: [],
+    tags: ["Backend"],
+  },
+];
 ---
 
 <section class="projects" id="proyectos">
   <div class="container">
-    <h2 class="section-title reveal">Proyectos</h2>
+    <div class="projects__intro">
+      <button
+        type="button"
+        class="projects__title"
+        data-go-folders
+        aria-controls="carpetas"
+        aria-describedby="projects-desc"
+      >
+        <span class="section-title">Proyectos</span>
+        <span class="projects__arrow" aria-hidden="true">↓</span>
+      </button>
+      <div class="projects__desc-wrap">
+        <div class="projects__desc" id="projects-desc">
+          <p>
+            Proyectos de tecnología que son parte de mi camino en la programación. En los tres me encargué
+            del <span class="mono-accent">backend</span>: los datos, el servidor y la lógica que hace que todo funcione.
+          </p>
+        </div>
+      </div>
+      <p class="projects__hint reveal">Tocá el título para ver los proyectos</p>
+    </div>
 
-    <article class="project">
-      <div class="project__text">
-        <p class="eyebrow reveal">5to año · 2026 · Plataforma web + bot</p>
-        <h3 class="project__title reveal">BuildData</h3>
-        <p class="project__desc reveal">
-          Gestión de obras en construcción. El equipo manda audios, fotos y mensajes por WhatsApp, y BuildData los
-          convierte en datos ordenados en un dashboard.
-        </p>
-        <p class="project__note reveal">
-          <span class="mono-accent"
-            ><span class="count" data-to="4">4</span>° puesto entre <span class="count" data-to="127">127</span> alumnos</span
-          > en el workshop de herramientas de IA de Gemini Academy.
-        </p>
-        <p class="project__note reveal">
-          <span class="mono-accent">MVP Experience</span>: participé con mi equipo presentando el proyecto frente a
-          inversores y profesionales de la industria.
-        </p>
-        <ul class="tags reveal">
-          <li class="tag tag--fill">Backend</li>
-          <li class="tag">Node.js</li>
-          <li class="tag">Express</li>
-          <li class="tag">Supabase</li>
-        </ul>
-        <a href="https://github.com/facujarma/BuildData" class="link-arrow reveal" target="_blank" rel="noopener"
-          >Ver el repositorio <span aria-hidden="true">→</span></a
-        >
-      </div>
-      <div class="project__media project__media--swap" data-cursor>
-        <Image src={builddataLanding} alt="Landing de BuildData" widths={widths} sizes={sizes} />
-        <Image src={builddataDashboard} alt="Dashboard de BuildData" widths={widths} sizes={sizes} class="swap" />
-      </div>
-    </article>
-
-    <article class="project">
-      <div class="project__text">
-        <p class="eyebrow reveal">4to año · 2025 · Realidad virtual</p>
-        <h3 class="project__title reveal">Tennis VR</h3>
-        <p class="project__desc reveal">Un partido de tenis en realidad virtual.</p>
-        <p class="project__note reveal">
-          <span class="mono-accent">TIC XP 2026</span>: nos convocaron con mi equipo para presentarlo y acercar a chicos
-          más chicos a la tecnología.
-        </p>
-        <ul class="tags reveal">
-          <li class="tag tag--fill">Backend</li>
-          <li class="tag">Meta Quest VR</li>
-          <li class="tag">Videojuegos</li>
-        </ul>
-      </div>
-      <div class="project__media" data-cursor>
-        <Image src={tennisVr} alt="Persona jugando Tennis VR con un visor Meta Quest" widths={widths} sizes={sizes} />
-      </div>
-    </article>
-
-    <article class="project">
-      <div class="project__text">
-        <p class="eyebrow reveal">3er año · 2024 · Web</p>
-        <h3 class="project__title reveal">Planify</h3>
-        <p class="project__desc reveal">
-          Una web para encontrar tu plan ideal, filtrando por espacios abiertos o cerrados y por cuántas personas son.
-        </p>
-        <ul class="tags reveal">
-          <li class="tag tag--fill">Backend</li>
-        </ul>
-      </div>
-      <div class="project__media" data-cursor>
-        <Image src={planify} alt="Pantalla principal de Planify" widths={widths} sizes={sizes} />
-      </div>
-    </article>
+    <ul class="folders" id="carpetas">
+      {
+        projects.map((p, i) => (
+          <li class="reveal">
+            <button
+              type="button"
+              class="folder"
+              data-open-modal={`modal-${p.id}`}
+              data-cursor
+              aria-haspopup="dialog"
+            >
+              <span class="folder__tab">{String(i + 1).padStart(2, "0")}</span>
+              <span class="folder__body">
+                <span class="folder__paper">
+                  <Image src={p.cover} alt="" widths={[400, 640]} sizes="(max-width: 900px) 90vw, 420px" />
+                </span>
+                <span class="folder__front">
+                  <span class="folder__year">{p.year}</span>
+                  <span class="folder__title">{p.title}</span>
+                  <span class="folder__kind">{p.kind}</span>
+                </span>
+              </span>
+            </button>
+          </li>
+        ))
+      }
+    </ul>
   </div>
+
+  {
+    projects.map((p) => (
+      <dialog class="project-modal" id={`modal-${p.id}`} aria-labelledby={`modal-title-${p.id}`}>
+        <div class="modal__inner" data-lenis-prevent>
+          <div class="modal__media" style={`--folder: ${p.color}`}>
+            {p.images.map((img) => (
+              <Image src={img.src} alt={img.alt} widths={[480, 720]} sizes="(max-width: 900px) 90vw, 540px" />
+            ))}
+          </div>
+          <div class="modal__body">
+            <button type="button" class="modal__close" data-close-modal aria-label="Cerrar">
+              ✕
+            </button>
+            <p class="eyebrow">{p.meta}</p>
+            <h3 class="modal__title" id={`modal-title-${p.id}`}>
+              {p.title}
+            </h3>
+            <div class="modal__block">
+              <h4>Qué es</h4>
+              <p>{p.about}</p>
+            </div>
+            <div class="modal__block">
+              <h4>Qué hice</h4>
+              <p>{p.role}</p>
+            </div>
+            {p.achievements.length > 0 && (
+              <div class="modal__block">
+                <h4>Logros</h4>
+                <ul>
+                  {p.achievements.map((a) => (
+                    <li>{a}</li>
+                  ))}
+                </ul>
+              </div>
+            )}
+            <ul class="tags">
+              {p.tags.map((t, i) => (
+                <li class={i === 0 ? "tag tag--fill" : "tag"}>{t}</li>
+              ))}
+            </ul>
+            {p.link && (
+              <a href={p.link.href} class="link-arrow" target="_blank" rel="noopener">
+                {p.link.text} <span aria-hidden="true">→</span>
+              </a>
+            )}
+          </div>
+        </div>
+      </dialog>
+    ))
+  }
 </section>

@@ -29,19 +29,13 @@ import Lenis from "lenis";
     });
   });
 
-  // Con "reducir movimiento": mostrar todo tal cual.
-  if (reduceMotion) {
-    root.classList.remove("js");
-    return;
-  }
-
-  gsap.registerPlugin(ScrollTrigger);
-
-  // ---------- Scroll suave (Lenis) ----------
-  const lenis = new Lenis({ duration: 1.1, smoothWheel: true });
-  lenis.on("scroll", ScrollTrigger.update);
-  gsap.ticker.add((t) => lenis.raf(t * 1000));
-  gsap.ticker.lagSmoothing(0);
+  // ---------- Scroll suave (Lenis) — solo si se permite movimiento ----------
+  let lenis = null;
+  const navOffset = () => -document.querySelector(".nav").offsetHeight + 1;
+  const scrollToEl = (target, extra = 0) => {
+    if (lenis) lenis.scrollTo(target, { offset: navOffset() + extra });
+    else window.scrollTo({ top: target.getBoundingClientRect().top + window.scrollY + navOffset() + extra });
+  };
 
   // Enlaces internos (incluye el sello giratorio → Proyectos)
   document.querySelectorAll('a[href^="#"]').forEach((a) => {
@@ -50,10 +44,59 @@ import Lenis from "lenis";
       const target = id.length > 1 ? document.querySelector(id) : null;
       if (!target) return;
       e.preventDefault();
-      const offset = -document.querySelector(".nav").offsetHeight + 1;
-      lenis.scrollTo(target, { offset });
+      scrollToEl(target);
     });
   });
+
+  // ---------- Proyectos: el título lleva a las carpetas ----------
+  const intro = document.querySelector(".projects__intro");
+  const folders = document.querySelector("#carpetas");
+  document.querySelector("[data-go-folders]")?.addEventListener("click", () => {
+    intro.classList.add("is-open");
+    scrollToEl(folders, -24);
+    if (!reduceMotion) {
+      gsap.fromTo(
+        ".folder",
+        { y: 0 },
+        { y: -14, duration: 0.25, ease: "power2.out", stagger: 0.08, yoyo: true, repeat: 1, delay: 0.7 }
+      );
+    }
+  });
+
+  // ---------- Carpetas: cada una abre una ventana con el detalle ----------
+  document.querySelectorAll("[data-open-modal]").forEach((btn) => {
+    const dialog = document.getElementById(btn.dataset.openModal);
+    btn.addEventListener("click", () => {
+      dialog.showModal();
+      root.classList.add("modal-open");
+      lenis?.stop();
+      dialog.querySelector(".modal__inner").scrollTop = 0;
+    });
+  });
+  document.querySelectorAll(".project-modal").forEach((dialog) => {
+    dialog.querySelector("[data-close-modal]").addEventListener("click", () => dialog.close());
+    // Clic afuera de la ventana (en el fondo) la cierra
+    dialog.addEventListener("click", (e) => {
+      if (e.target === dialog) dialog.close();
+    });
+    dialog.addEventListener("close", () => {
+      root.classList.remove("modal-open");
+      lenis?.start();
+    });
+  });
+
+  // Con "reducir movimiento": mostrar todo tal cual.
+  if (reduceMotion) {
+    root.classList.remove("js");
+    return;
+  }
+
+  gsap.registerPlugin(ScrollTrigger);
+
+  lenis = new Lenis({ duration: 1.1, smoothWheel: true });
+  lenis.on("scroll", ScrollTrigger.update);
+  gsap.ticker.add((t) => lenis.raf(t * 1000));
+  gsap.ticker.lagSmoothing(0);
 
   // ---------- 01. Entrada del nombre ----------
   gsap.to(".hero__name .line__inner", {
@@ -116,20 +159,13 @@ import Lenis from "lenis";
     window.addEventListener("mousemove", (e) => { xTo(e.clientX); yTo(e.clientY); });
     document.querySelectorAll("[data-cursor]").forEach((el) => {
       el.addEventListener("mouseenter", () => gsap.to(cursor, { scale: 1, opacity: 1, duration: 0.25, ease: "power2.out" }));
-      el.addEventListener("mouseleave", () => gsap.to(cursor, { scale: 0, opacity: 0, duration: 0.25, ease: "power2.out" }));
+      const hide = () => gsap.to(cursor, { scale: 0, opacity: 0, duration: 0.25, ease: "power2.out" });
+      el.addEventListener("mouseleave", hide);
+      el.addEventListener("click", hide);
     });
   }
 
-  // ---------- 06. Fotos de proyectos: se descubren de abajo hacia arriba ----------
-  document.querySelectorAll(".project__media").forEach((el) => {
-    gsap.to(el, {
-      clipPath: "inset(0% 0 0 0)",
-      duration: 0.8,
-      ease: "power3.out",
-      scrollTrigger: { trigger: el, start: "top 85%", once: true },
-    });
-  });
-  // (zoom 1.04 y título corrido a la derecha: CSS en :hover)
+  // ---------- 06. Carpetas: entran en cascada con .reveal; al pasar el mouse se abren (CSS) ----------
 
   // ---------- 07. Aparición al hacer scroll (cascada) ----------
   ScrollTrigger.batch(".reveal", {
