@@ -7,6 +7,25 @@
   const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
   const hasGsap = typeof window.gsap !== "undefined" && typeof window.ScrollTrigger !== "undefined";
 
+  // ---------- 10b. Copiar email (funciona siempre, con o sin animaciones) ----------
+  document.querySelectorAll(".copy-email").forEach((btn) => {
+    const label = btn.querySelector(".copied");
+    let timer;
+    btn.addEventListener("click", async () => {
+      const email = btn.dataset.email;
+      try {
+        await navigator.clipboard.writeText(email);
+        label.textContent = "Copiado";
+      } catch {
+        window.location.href = "mailto:" + email;
+        return;
+      }
+      label.classList.add("is-on");
+      clearTimeout(timer);
+      timer = setTimeout(() => label.classList.remove("is-on"), 1400);
+    });
+  });
+
   // Sin GSAP o con "reducir movimiento": mostrar todo tal cual.
   if (!hasGsap || reduceMotion) {
     root.classList.remove("js");
@@ -149,6 +168,31 @@
       scrollTrigger: { trigger: el, start: "top 92%", once: true },
     });
   });
+
+  // ---------- 10. "Hablemos." ondula con el mouse ----------
+  const title = document.querySelector(".contact__title");
+  const text = title.textContent;
+  title.textContent = "";
+  const chars = [...text].map((c) => {
+    const s = document.createElement("span");
+    s.className = "ch";
+    s.setAttribute("aria-hidden", "true");
+    s.textContent = c;
+    title.appendChild(s);
+    return s;
+  });
+  const footer = document.querySelector(".contact");
+  footer.addEventListener("mousemove", (e) => {
+    chars.forEach((ch) => {
+      const r = ch.getBoundingClientRect();
+      const d = (e.clientX - (r.left + r.width / 2)) / 120;
+      const lift = Math.exp(-d * d) * -22;
+      gsap.to(ch, { y: lift, duration: 0.4, ease: "power2.out", overwrite: true });
+    });
+  });
+  footer.addEventListener("mouseleave", () =>
+    gsap.to(chars, { y: 0, duration: 0.4, ease: "power2.out", stagger: 0.02, overwrite: true })
+  );
 
   window.addEventListener("load", () => ScrollTrigger.refresh());
 })();
