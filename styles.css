@@ -229,3 +229,40 @@ button { font: inherit; color: inherit; background: none; border: 0; padding: 0;
 .seal__arrow { font-size: 34px; line-height: 1; transition: transform .25s var(--ease); }
 .seal:hover .seal__arrow { transform: translate(3px, -3px); }
 @keyframes spin { to { transform: rotate(360deg); } }
+
+/* ---------- CINTA ---------- */
+.marquee {
+  background: var(--ink);
+  color: var(--bg);
+  height: 128px;
+  display: flex;
+  align-items: center;
+  overflow: hidden;
+}
+.marquee__track { display: flex; width: max-content; will-change: transform; }
+.marquee__group {
+  display: flex;
+  align-items: center;
+  flex-shrink: 0;
+}
+.mq-sans {
+  font-family: var(--f-display);
+  font-weight: 800;
+  font-size: 64px;
+  letter-spacing: -.05em;
+  white-space: nowrap;
+}
+.mq-serif {
+  font-family: var(--f-serif);
+  font-style: italic;
+  font-size: 70px;
+  white-space: nowrap;
+}
+.mq-dot {
+  width: 17px;
+  height: 17px;
+  border-radius: 50%;
+  background: var(--blue);
+  margin: 22px 37px 0;
+  flex-shrink: 0;
+}
