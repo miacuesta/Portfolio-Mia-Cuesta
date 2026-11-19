@@ -426,3 +426,68 @@ button { font: inherit; color: inherit; background: none; border: 0; padding: 0;
   padding-top: 2px;
   font-variant-numeric: tabular-nums;
 }
+
+/* ---------- LO QUE VIENE ---------- */
+.next { padding: 70px 0 104px; }
+.next__grid {
+  display: grid;
+  grid-template-columns: 1fr 460px;
+  gap: 80px;
+  align-items: start;
+}
+.next .eyebrow { margin-top: 40px; }
+.next__title {
+  margin-top: 22px;
+  font-family: var(--f-display);
+  font-weight: 800;
+  font-size: clamp(42px, 4.6vw, 66px);
+  line-height: 1.12;
+  letter-spacing: -.055em;
+  max-width: 560px;
+}
+.next__title .serif { font-size: 1.12em; letter-spacing: -.01em; }
+.next__desc { margin-top: 30px; max-width: 470px; font-size: 17px; }
+
+/* ---------- HABLEMOS ---------- */
+.contact {
+  background: var(--ink);
+  color: var(--bg);
+  padding: 110px 0 120px;
+}
+.contact__grid {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 40px;
+  flex-wrap: wrap;
+}
+.contact__title {
+  font-family: var(--f-display);
+  font-weight: 800;
+  font-size: clamp(64px, 9vw, 128px);
+  line-height: 1;
+  letter-spacing: -.055em;
+  white-space: nowrap;
+  cursor: default;
+}
+.contact__title .ch { display: inline-block; will-change: transform; }
+.contact__list { font-family: var(--f-mono); font-size: 15.5px; }
+.contact__list > div { display: grid; grid-template-columns: 108px auto; padding: 6px 0; }
+.contact__list dt { color: #b9bab8; }
+.contact__list a, .copy-email { position: relative; }
+.contact__list a:hover, .copy-email:hover { color: #a9bfd3; }
+.copied {
+  position: absolute;
+  left: 50%;
+  bottom: 100%;
+  transform: translate(-50%, 4px);
+  background: var(--bg);
+  color: var(--ink);
+  font-size: 12px;
+  padding: 3px 8px;
+  white-space: nowrap;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity .4s var(--ease), transform .4s var(--ease);
+}
+.copied.is-on { opacity: 1; transform: translate(-50%, -6px); }
