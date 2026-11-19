@@ -492,6 +492,10 @@ button { font: inherit; color: inherit; background: none; border: 0; padding: 0;
 }
 .copied.is-on { opacity: 1; transform: translate(-50%, -6px); }
 
+/* ---------- Estados iniciales para animaciones (solo con JS) ---------- */
+.js .reveal { opacity: 0; transform: translateY(24px); }
+.js .line__inner { transform: translateY(110%); }
+
 /* ---------- Responsive ---------- */
 @media (max-width: 1200px) {
   :root { --gutter: 48px; }
@@ -544,4 +548,10 @@ button { font: inherit; color: inherit; background: none; border: 0; padding: 0;
   .hero__media { margin-left: 24px; }
   .contact__list > div { grid-template-columns: 84px auto; }
   .contact__list { font-size: 14px; }
+}
+
+/* Reducir movimiento: todo aparece sin animación */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after { animation: none !important; transition: none !important; }
+  .js .reveal, .js .line__inner, .js .project__media { opacity: 1; transform: none; clip-path: none; }
 }
