@@ -76,18 +76,22 @@ const projects = [
         <span class="section-title">Proyectos</span>
         <span class="projects__arrow" aria-hidden="true">↓</span>
       </button>
-      <div class="projects__desc-wrap">
-        <div class="projects__desc" id="projects-desc">
-          <p>
-            Proyectos de tecnología que son parte de mi camino en la programación. En los tres me encargué
-            del <span class="mono-accent">backend</span>: los datos, el servidor y la lógica que hace que todo funcione.
-          </p>
-        </div>
+      <div class="projects__desc" id="projects-desc">
+        <p>
+          Proyectos de tecnología que son parte de mi camino en la programación. En los tres me encargué
+          del <span class="mono-accent">backend</span>: los datos, el servidor y la lógica que hace que todo funcione.
+        </p>
       </div>
       <p class="projects__hint reveal">Tocá el título para ver los proyectos</p>
     </div>
+  </div>
 
-    <ul class="folders" id="carpetas">
+  <div class="container folders-screen" id="carpetas">
+    <div class="folders-head">
+      <p class="eyebrow">Proyectos · {projects.length} carpetas</p>
+      <p class="eyebrow">Tocá una carpeta para ver el detalle</p>
+    </div>
+    <ul class="folders">
       {
         projects.map((p, i) => (
           <li class="reveal">

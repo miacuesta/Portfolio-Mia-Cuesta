@@ -282,15 +282,15 @@ button { font: inherit; color: inherit; background: none; border: 0; padding: 0;
 }
 
 /* ---------- PROYECTOS ---------- */
-.projects { padding: 0 0 120px; }
+.projects { padding: 0; }
 
-/* Intro: primero se ve solo el título */
+/* Intro: el título ocupa toda la pantalla */
 .projects__intro {
-  min-height: 62svh;
+  min-height: calc(100svh - 88px);
   display: flex;
   flex-direction: column;
   justify-content: center;
-  padding: 100px 0 60px;
+  padding: 48px 0;
 }
 .projects__title {
   display: inline-flex;
@@ -315,29 +315,22 @@ button { font: inherit; color: inherit; background: none; border: 0; padding: 0;
 .projects__title:hover .projects__arrow,
 .projects__title:focus-visible .projects__arrow { transform: translateY(10px); }
 
-/* Mini descripción que baja al pasar el mouse por el título */
-.projects__desc-wrap {
-  display: grid;
-  grid-template-rows: 0fr;
-  transition: grid-template-rows .45s var(--ease);
-}
+/* Mini descripción que baja al pasar el mouse por el título.
+   Su lugar está reservado, así el título no salta. */
 .projects__desc {
-  overflow: hidden;
   max-width: 620px;
   font-size: 19px;
   line-height: 1.55;
   color: var(--ink-soft);
+  overflow: hidden;
 }
 .projects__desc p {
   padding-top: 20px;
   opacity: 0;
-  transform: translateY(-12px);
-  transition: opacity .35s var(--ease), transform .45s var(--ease);
+  transform: translateY(-100%);
+  transition: opacity .35s var(--ease), transform .5s var(--ease);
 }
 .projects__desc .mono-accent { font-size: 17px; }
-.projects__intro:has(.projects__title:hover) .projects__desc-wrap,
-.projects__intro:has(.projects__title:focus-visible) .projects__desc-wrap,
-.projects__intro.is-open .projects__desc-wrap { grid-template-rows: 1fr; }
 .projects__intro:has(.projects__title:hover) .projects__desc p,
 .projects__intro:has(.projects__title:focus-visible) .projects__desc p,
 .projects__intro.is-open .projects__desc p { opacity: 1; transform: none; }
@@ -350,14 +343,28 @@ button { font: inherit; color: inherit; background: none; border: 0; padding: 0;
   color: var(--muted);
 }
 
-/* Carpetas */
+/* Carpetas: su propia pantalla completa */
+.folders-screen {
+  min-height: calc(100svh - 88px);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding-top: 40px;
+  padding-bottom: 64px;
+}
+.folders-head {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  gap: 16px;
+  padding-bottom: 18px;
+  margin-bottom: 7svh;
+  border-bottom: 1px solid var(--line);
+}
 .folders {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
   gap: 32px;
-  padding-top: 48px;
-  border-top: 1px solid var(--line);
-  scroll-margin-top: 110px;
 }
 .folder {
   --folder: var(--blue);
@@ -749,7 +756,9 @@ html.modal-open { overflow: hidden; }
   .mq-serif { font-size: 48px; }
   .mq-dot { width: 12px; height: 12px; margin: 14px 24px 0; }
 
-  .projects__intro { min-height: 50svh; padding: 72px 0 40px; }
+  .projects__intro { min-height: calc(100svh - 68px); padding: 40px 0; }
+  .folders-screen { min-height: calc(100svh - 68px); padding-top: 32px; padding-bottom: 56px; }
+  .folders-head { margin-bottom: 28px; flex-direction: column; gap: 4px; }
   .projects__desc { font-size: 17px; }
   /* En pantallas táctiles no hay hover: la descripción se ve siempre */
   .folders { grid-template-columns: 1fr; gap: 28px; }
@@ -768,7 +777,6 @@ html.modal-open { overflow: hidden; }
 }
 
 @media (hover: none) {
-  .projects__desc-wrap { grid-template-rows: 1fr; }
   .projects__desc p { opacity: 1; transform: none; }
 }
 

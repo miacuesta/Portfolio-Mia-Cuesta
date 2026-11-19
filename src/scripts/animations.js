@@ -53,7 +53,7 @@ import Lenis from "lenis";
   const folders = document.querySelector("#carpetas");
   document.querySelector("[data-go-folders]")?.addEventListener("click", () => {
     intro.classList.add("is-open");
-    scrollToEl(folders, -24);
+    scrollToEl(folders);
     if (!reduceMotion) {
       gsap.fromTo(
         ".folder",
