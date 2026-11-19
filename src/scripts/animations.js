@@ -2,10 +2,13 @@
    Mía Cuesta — Animaciones (ver assets/Animaciones para la web.png)
    GSAP + ScrollTrigger + Lenis. Con "reducir movimiento" no se anima nada.
    ================================================================ */
+import { gsap } from "gsap";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
+import Lenis from "lenis";
+
 (function () {
   const root = document.documentElement;
   const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-  const hasGsap = typeof window.gsap !== "undefined" && typeof window.ScrollTrigger !== "undefined";
 
   // ---------- 10b. Copiar email (funciona siempre, con o sin animaciones) ----------
   document.querySelectorAll(".copy-email").forEach((btn) => {
@@ -26,8 +29,8 @@
     });
   });
 
-  // Sin GSAP o con "reducir movimiento": mostrar todo tal cual.
-  if (!hasGsap || reduceMotion) {
+  // Con "reducir movimiento": mostrar todo tal cual.
+  if (reduceMotion) {
     root.classList.remove("js");
     return;
   }
@@ -35,13 +38,10 @@
   gsap.registerPlugin(ScrollTrigger);
 
   // ---------- Scroll suave (Lenis) ----------
-  let lenis = null;
-  if (typeof window.Lenis !== "undefined") {
-    lenis = new Lenis({ duration: 1.1, smoothWheel: true });
-    lenis.on("scroll", ScrollTrigger.update);
-    gsap.ticker.add((t) => lenis.raf(t * 1000));
-    gsap.ticker.lagSmoothing(0);
-  }
+  const lenis = new Lenis({ duration: 1.1, smoothWheel: true });
+  lenis.on("scroll", ScrollTrigger.update);
+  gsap.ticker.add((t) => lenis.raf(t * 1000));
+  gsap.ticker.lagSmoothing(0);
 
   // Enlaces internos (incluye el sello giratorio → Proyectos)
   document.querySelectorAll('a[href^="#"]').forEach((a) => {
@@ -51,8 +51,7 @@
       if (!target) return;
       e.preventDefault();
       const offset = -document.querySelector(".nav").offsetHeight + 1;
-      if (lenis) lenis.scrollTo(target, { offset });
-      else window.scrollTo({ top: target.getBoundingClientRect().top + window.scrollY + offset, behavior: "smooth" });
+      lenis.scrollTo(target, { offset });
     });
   });
 
