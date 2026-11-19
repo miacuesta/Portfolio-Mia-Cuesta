@@ -90,6 +90,29 @@
 
   // ---------- 04. Botones: hover por CSS (250 ms ease-out) ----------
 
+  // ---------- 05. Cursor propio "Ver" ----------
+  const cursor = document.querySelector(".cursor");
+  if (window.matchMedia("(hover: hover)").matches) {
+    const xTo = gsap.quickTo(cursor, "x", { duration: 0.15, ease: "power2.out" });
+    const yTo = gsap.quickTo(cursor, "y", { duration: 0.15, ease: "power2.out" });
+    window.addEventListener("mousemove", (e) => { xTo(e.clientX); yTo(e.clientY); });
+    document.querySelectorAll("[data-cursor]").forEach((el) => {
+      el.addEventListener("mouseenter", () => gsap.to(cursor, { scale: 1, opacity: 1, duration: 0.25, ease: "power2.out" }));
+      el.addEventListener("mouseleave", () => gsap.to(cursor, { scale: 0, opacity: 0, duration: 0.25, ease: "power2.out" }));
+    });
+  }
+
+  // ---------- 06. Fotos de proyectos: se descubren de abajo hacia arriba ----------
+  document.querySelectorAll(".project__media").forEach((el) => {
+    gsap.to(el, {
+      clipPath: "inset(0% 0 0 0)",
+      duration: 0.8,
+      ease: "power3.out",
+      scrollTrigger: { trigger: el, start: "top 85%", once: true },
+    });
+  });
+  // (zoom 1.04 y título corrido a la derecha: CSS en :hover)
+
   // ---------- 07. Aparición al hacer scroll (cascada) ----------
   ScrollTrigger.batch(".reveal", {
     start: "top 90%",
