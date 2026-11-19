@@ -713,6 +713,8 @@ html.modal-open { overflow: hidden; }
 /* ---------- Estados iniciales para animaciones (solo con JS) ---------- */
 .js .reveal { opacity: 0; transform: translateY(24px); }
 .js .line__inner { transform: translateY(110%); }
+/* Botones y sello del inicio: aparecen cuando el usuario empieza a scrollear */
+.js .hero__ctas, .js .seal { opacity: 0; visibility: hidden; }
 
 /* ---------- Responsive ---------- */
 @media (max-width: 1200px) {
@@ -796,4 +798,5 @@ html.modal-open { overflow: hidden; }
 @media (prefers-reduced-motion: reduce) {
   *, *::before, *::after { animation: none !important; transition: none !important; }
   .js .reveal, .js .line__inner { opacity: 1; transform: none; }
+  .js .hero__ctas, .js .seal { opacity: 1; visibility: visible; }
 }

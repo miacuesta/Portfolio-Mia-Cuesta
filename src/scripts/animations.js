@@ -110,6 +110,23 @@ import Lenis from "lenis";
   // El resto del inicio aparece al cargar (ya está en pantalla, no espera al scroll)
   gsap.to(".hero .reveal", { opacity: 1, y: 0, duration: 0.6, ease: "power2.out", stagger: 0.08, delay: 0.45 });
 
+  // Botones y sello: aparecen apenas el usuario empieza a scrollear (y se van si vuelve arriba)
+  const showLater = gsap
+    .timeline({ paused: true })
+    .fromTo(".hero__ctas", { autoAlpha: 0, y: 24 }, { autoAlpha: 1, y: 0, duration: 0.6, ease: "power2.out" })
+    .fromTo(
+      ".seal",
+      { autoAlpha: 0, scale: 0.4, rotate: -90 },
+      { autoAlpha: 1, scale: 1, rotate: 0, duration: 0.8, ease: "back.out(1.6)" },
+      "-=0.4"
+    );
+  ScrollTrigger.create({
+    start: 8, // apenas se mueve la página (en píxeles de scroll)
+    end: "max",
+    onEnter: () => showLater.play(),
+    onLeaveBack: () => showLater.reverse(),
+  });
+
   // Al scrollear, el inicio se despide suave mientras sube la cinta
   const heroScroll = { trigger: ".hero", start: "top top", end: "bottom top", scrub: true };
   gsap.to(".hero__text", { yPercent: -12, opacity: 0.25, ease: "none", scrollTrigger: heroScroll });
