@@ -1,0 +1,39 @@
+---
+import "../styles/global.css";
+
+interface Props {
+  title?: string;
+  description?: string;
+}
+
+const {
+  title = "Mía Cuesta Barizom — Portfolio",
+  description = "Mía Cuesta Barizom: backend, datos y patín artístico. Próximo paso: Ingeniería en Biotecnología en el ITBA.",
+} = Astro.props;
+---
+
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>{title}</title>
+    <meta name="description" content={description} />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=Hanken+Grotesk:wght@400;500;600&family=Instrument+Serif:ital@0;1&family=Inter+Tight:wght@600;700;800&display=swap"
+      rel="stylesheet"
+    />
+    <script is:inline>
+      // Estados iniciales de animación solo si hay JS y no se pidió reducir movimiento
+      if (!matchMedia("(prefers-reduced-motion: reduce)").matches) document.documentElement.classList.add("js");
+    </script>
+  </head>
+  <body>
+    <slot />
+    <script>
+      import "../scripts/animations.js";
+    </script>
+  </body>
+</html>

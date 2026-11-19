@@ -1,0 +1,19 @@
+---
+import { Image } from "astro:assets";
+import ciervo from "../assets/img/ciervo.png";
+---
+
+<section class="next">
+  <div class="container next__grid">
+    <div>
+      <p class="eyebrow reveal">Lo que viene</p>
+      <h2 class="next__title reveal">Ingeniería en <span class="serif accent-green">Biotecnología</span>, en el ITBA.</h2>
+      <p class="next__desc reveal">
+        La biotecnología junta dos cosas que me interesan mucho: la biología y el trabajo con datos.
+      </p>
+    </div>
+    <div class="next__media reveal">
+      <Image src={ciervo} alt="Ciervo entre faroles de piedra cubiertos de musgo" />
+    </div>
+  </div>
+</section>

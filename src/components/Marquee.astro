@@ -1,0 +1,24 @@
+---
+const words = [
+  { text: "Backend", style: "sans" },
+  { text: "datos", style: "serif" },
+  { text: "Patín artístico", style: "sans" },
+  { text: "análisis", style: "serif" },
+  { text: "Biotecnología", style: "sans" },
+];
+---
+
+<section class="marquee" aria-label="Palabras clave">
+  <div class="marquee__track">
+    <div class="marquee__group">
+      {
+        words.map((w) => (
+          <>
+            <span class={`mq-${w.style}`}>{w.text}</span>
+            <i class="mq-dot" />
+          </>
+        ))
+      }
+    </div>
+  </div>
+</section>

@@ -1,0 +1,44 @@
+---
+import { Image } from "astro:assets";
+import competencia from "../assets/img/competencia.png";
+import patines from "../assets/img/patines.png";
+import hoja from "../assets/img/hoja.png";
+import microscopio from "../assets/img/microscopio.png";
+
+// data-speed: desplazamiento del parallax (6–12 %)
+const photos = [
+  { src: competencia, alt: "Mía en una competencia de patín artístico", speed: 0.06 },
+  { src: patines, alt: "Patines de patín artístico", speed: 0.12 },
+  { src: hoja, alt: "Hoja cubierta de escarcha", speed: 0.1 },
+  { src: microscopio, alt: "Células vistas por microscopio", speed: 0.08 },
+];
+---
+
+<section class="about" id="sobre-mi">
+  <div class="container about__grid">
+    <div class="about__text">
+      <p class="eyebrow reveal">Sobre mí</p>
+      <h2 class="about__quote reveal">
+        “No dejes para mañana lo que podés hacer <span class="serif accent-blue">hoy</span>”
+      </h2>
+      <p class="reveal">
+        Gran parte de mi personalidad se basa en esa frase: aprovechar las oportunidades, esforzarme aunque los tiempos
+        se pongan difíciles y pensar a largo plazo.
+      </p>
+      <p class="reveal">
+        Entreno patinaje artístico en River desde los 8 años y estoy federada desde los 12. Compito en individual y en
+        grupal. Con el equipo no siempre salimos primeras: a veces quedamos últimas, y otras nos quedamos a un pasito de
+        un Panamericano.
+      </p>
+    </div>
+    <div class="about__photos">
+      {
+        photos.map((p, i) => (
+          <figure class={`ph ph--${i + 1}`} data-speed={p.speed}>
+            <Image src={p.src} alt={p.alt} />
+          </figure>
+        ))
+      }
+    </div>
+  </div>
+</section>

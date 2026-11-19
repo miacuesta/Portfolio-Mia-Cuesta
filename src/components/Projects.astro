@@ -1,0 +1,85 @@
+---
+import { Image } from "astro:assets";
+import builddataLanding from "../assets/img/builddata-landing.png";
+import builddataDashboard from "../assets/img/builddata-dashboard.png";
+import tennisVr from "../assets/img/tennis-vr.png";
+import planify from "../assets/img/planify.png";
+
+const sizes = "(max-width: 900px) 100vw, 720px";
+const widths = [480, 720];
+---
+
+<section class="projects" id="proyectos">
+  <div class="container">
+    <h2 class="section-title reveal">Proyectos</h2>
+
+    <article class="project">
+      <div class="project__text">
+        <p class="eyebrow reveal">5to año · 2026 · Plataforma web + bot</p>
+        <h3 class="project__title reveal">BuildData</h3>
+        <p class="project__desc reveal">
+          Gestión de obras en construcción. El equipo manda audios, fotos y mensajes por WhatsApp, y BuildData los
+          convierte en datos ordenados en un dashboard.
+        </p>
+        <p class="project__note reveal">
+          <span class="mono-accent"
+            ><span class="count" data-to="4">4</span>° puesto entre <span class="count" data-to="127">127</span> alumnos</span
+          > en el workshop de herramientas de IA de Gemini Academy.
+        </p>
+        <p class="project__note reveal">
+          <span class="mono-accent">MVP Experience</span>: participé con mi equipo presentando el proyecto frente a
+          inversores y profesionales de la industria.
+        </p>
+        <ul class="tags reveal">
+          <li class="tag tag--fill">Backend</li>
+          <li class="tag">Node.js</li>
+          <li class="tag">Express</li>
+          <li class="tag">Supabase</li>
+        </ul>
+        <a href="https://github.com/facujarma/BuildData" class="link-arrow reveal" target="_blank" rel="noopener"
+          >Ver el repositorio <span aria-hidden="true">→</span></a
+        >
+      </div>
+      <div class="project__media project__media--swap" data-cursor>
+        <Image src={builddataLanding} alt="Landing de BuildData" widths={widths} sizes={sizes} />
+        <Image src={builddataDashboard} alt="Dashboard de BuildData" widths={widths} sizes={sizes} class="swap" />
+      </div>
+    </article>
+
+    <article class="project">
+      <div class="project__text">
+        <p class="eyebrow reveal">4to año · 2025 · Realidad virtual</p>
+        <h3 class="project__title reveal">Tennis VR</h3>
+        <p class="project__desc reveal">Un partido de tenis en realidad virtual.</p>
+        <p class="project__note reveal">
+          <span class="mono-accent">TIC XP 2026</span>: nos convocaron con mi equipo para presentarlo y acercar a chicos
+          más chicos a la tecnología.
+        </p>
+        <ul class="tags reveal">
+          <li class="tag tag--fill">Backend</li>
+          <li class="tag">Meta Quest VR</li>
+          <li class="tag">Videojuegos</li>
+        </ul>
+      </div>
+      <div class="project__media" data-cursor>
+        <Image src={tennisVr} alt="Persona jugando Tennis VR con un visor Meta Quest" widths={widths} sizes={sizes} />
+      </div>
+    </article>
+
+    <article class="project">
+      <div class="project__text">
+        <p class="eyebrow reveal">3er año · 2024 · Web</p>
+        <h3 class="project__title reveal">Planify</h3>
+        <p class="project__desc reveal">
+          Una web para encontrar tu plan ideal, filtrando por espacios abiertos o cerrados y por cuántas personas son.
+        </p>
+        <ul class="tags reveal">
+          <li class="tag tag--fill">Backend</li>
+        </ul>
+      </div>
+      <div class="project__media" data-cursor>
+        <Image src={planify} alt="Pantalla principal de Planify" widths={widths} sizes={sizes} />
+      </div>
+    </article>
+  </div>
+</section>

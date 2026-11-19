@@ -1,0 +1,15 @@
+---
+const cv = `${import.meta.env.BASE_URL}/cv.pdf`.replace("//", "/");
+---
+
+<header class="nav">
+  <div class="container nav__inner">
+    <a href="#inicio" class="nav__logo">Mía Cuesta</a>
+    <nav class="nav__links" aria-label="Principal">
+      <a href="#proyectos">Proyectos</a>
+      <a href="#sobre-mi">Sobre mí</a>
+      <a href={cv} target="_blank" rel="noopener">CV</a>
+      <a href="#contacto">Contacto</a>
+    </nav>
+  </div>
+</header>

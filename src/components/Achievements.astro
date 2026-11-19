@@ -1,0 +1,70 @@
+---
+// Cada logro: año + texto. En el texto, {4} y {127} se convierten en contadores animados.
+const groups = [
+  {
+    title: "Modelo de ONU",
+    items: [
+      { year: 2024, text: "Mención como delegada de Arabia Saudita (OIT), entre 50 participantes." },
+      { year: 2025, text: "Mención como senadora por Tucumán, debate sobre la Reforma Previsional." },
+      { year: 2026, text: "Presidencia, acompañando a quienes participan por primera vez." },
+    ],
+  },
+  {
+    title: "Inglés",
+    items: [
+      { year: 2025, text: "First Certificate con B" },
+      { year: 2026, text: "Advanced (CAE)" },
+      { year: 2026, text: "Intercambio en Londres" },
+    ],
+  },
+  {
+    title: "Tecnología",
+    items: [
+      { year: 2026, text: "Gemini Academy: {4}° puesto entre {127} con BuildData." },
+      { year: 2026, text: "TIC XP: convocada para presentar Tennis VR." },
+      { year: 2026, text: "MVP XP: convocada para presentar BuildData." },
+    ],
+  },
+];
+
+const parts = (text: string) =>
+  text.split(/(\{\d+\})/).map((p) => {
+    const m = p.match(/^\{(\d+)\}$/);
+    return m ? { count: m[1] } : { text: p };
+  });
+---
+
+<section class="achievements" id="logros">
+  <div class="container">
+    <h2 class="section-title reveal">Logros</h2>
+    <div class="cards">
+      {
+        groups.map((g) => (
+          <div class="card reveal">
+            <h3>{g.title}</h3>
+            <ul>
+              {g.items.map((item) => (
+                <li>
+                  <span class="year count" data-to={item.year}>
+                    {item.year}
+                  </span>
+                  <span>
+                    {parts(item.text).map((p) =>
+                      "count" in p ? (
+                        <span class="count" data-to={p.count}>
+                          {p.count}
+                        </span>
+                      ) : (
+                        p.text
+                      )
+                    )}
+                  </span>
+                </li>
+              ))}
+            </ul>
+          </div>
+        ))
+      }
+    </div>
+  </div>
+</section>

@@ -1,0 +1,35 @@
+---
+const email = "miacuesta99@gmail.com";
+const links = [
+  { label: "LinkedIn", text: "Mia Cuesta", href: "https://www.linkedin.com/in/mia-cuesta-a6b0723bb" },
+  { label: "GitHub", text: "miacuesta", href: "https://github.com/miacuesta" },
+];
+---
+
+<footer class="contact" id="contacto">
+  <div class="container contact__grid">
+    <h2 class="contact__title" aria-label="Hablemos.">Hablemos.</h2>
+    <dl class="contact__list">
+      <div>
+        <dt>Email</dt>
+        <dd>
+          <button type="button" class="copy-email" data-email={email}>
+            {email}<span class="copied" aria-live="polite"></span>
+          </button>
+        </dd>
+      </div>
+      {
+        links.map((l) => (
+          <div>
+            <dt>{l.label}</dt>
+            <dd>
+              <a href={l.href} target="_blank" rel="noopener">
+                {l.text} <span aria-hidden="true">↗</span>
+              </a>
+            </dd>
+          </div>
+        ))
+      }
+    </dl>
+  </div>
+</footer>
