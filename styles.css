@@ -392,3 +392,37 @@ button { font: inherit; color: inherit; background: none; border: 0; padding: 0;
 .ph--2 { grid-column: 3; grid-row: 1; }
 .ph--3 { grid-column: 1; grid-row: 2; width: 207px; }
 .ph--4 { grid-column: 2 / 4; grid-row: 2; width: 300px; justify-self: end; }
+
+/* ---------- LOGROS ---------- */
+.achievements { padding: 120px 0; border-bottom: 1px solid var(--line); }
+.achievements .section-title { margin-bottom: 42px; font-size: clamp(44px, 4.6vw, 66px); }
+.cards {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 24px;
+  align-items: start;
+}
+.card { background: var(--white); padding: 30px 28px 6px; }
+.card h3 {
+  font-family: var(--f-display);
+  font-weight: 700;
+  font-size: 30px;
+  letter-spacing: -.04em;
+  padding-bottom: 20px;
+  border-bottom: 1px solid var(--line-soft);
+}
+.card li {
+  display: grid;
+  grid-template-columns: 84px 1fr;
+  padding: 18px 0 22px;
+  font-size: 15px;
+  line-height: 1.55;
+}
+.card li + li { border-top: 1px solid var(--line-soft); }
+.year {
+  font-family: var(--f-mono);
+  font-size: 13px;
+  color: var(--ink-soft);
+  padding-top: 2px;
+  font-variant-numeric: tabular-nums;
+}
