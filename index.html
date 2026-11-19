@@ -1,0 +1,72 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Mía Cuesta Barizom — Portfolio</title>
+  <meta name="description" content="Mía Cuesta Barizom: backend, datos y patín artístico. Próximo paso: Ingeniería en Biotecnología en el ITBA.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=Hanken+Grotesk:wght@400;500;600&family=Instrument+Serif:ital@0;1&family=Inter+Tight:wght@600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+  <header class="nav">
+    <div class="container nav__inner">
+      <a href="#inicio" class="nav__logo">Mía Cuesta</a>
+      <nav class="nav__links" aria-label="Principal">
+        <a href="#proyectos">Proyectos</a>
+        <a href="#sobre-mi">Sobre mí</a>
+        <a href="cv.pdf" target="_blank" rel="noopener">CV</a>
+        <a href="#contacto">Contacto</a>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    <!-- HERO -->
+    <section class="hero" id="inicio">
+      <div class="container hero__grid">
+        <div class="hero__text">
+          <p class="eyebrow">Backend · Datos · Patín artístico</p>
+          <h1 class="hero__name">
+            <span class="line"><span class="line__inner">Mía</span></span>
+            <span class="line"><span class="line__inner">Cuesta</span></span>
+            <span class="line"><span class="line__inner serif accent-blue barizom">Barizom</span></span>
+          </h1>
+          <p class="hero__lead reveal">
+            Hago backend: me gustan los datos, el<br class="br-desk"> análisis y los números.<br>
+            Patino en River Plate desde los ocho años.
+          </p>
+          <div class="hero__ctas reveal">
+            <a href="#proyectos" class="btn btn--dark">Ver proyectos <span class="btn__arrow" aria-hidden="true">→</span></a>
+            <a href="cv.pdf" target="_blank" rel="noopener" class="btn btn--outline">Ver CV <span class="btn__arrow" aria-hidden="true">→</span></a>
+          </div>
+          <div class="hero__next reveal">
+            <span class="eyebrow">Próximo paso</span>
+            <span>Ingeniería en Biotecnología <span class="dot-sep">·</span> ITBA</span>
+          </div>
+        </div>
+
+        <div class="hero__media">
+          <img src="img/retrato.png" alt="Retrato de Mía Cuesta" width="600" height="780">
+          <a href="#proyectos" class="seal" aria-label="Ir a proyectos">
+            <svg class="seal__ring" viewBox="0 0 200 200" aria-hidden="true">
+              <defs>
+                <path id="sealPath" d="M100,100 m-74,0 a74,74 0 1,1 148,0 a74,74 0 1,1 -148,0"/>
+              </defs>
+              <text>
+                <textPath href="#sealPath" textLength="462">BACKEND · DATOS · PATÍN · BIOTECNOLOGÍA ·</textPath>
+              </text>
+            </svg>
+            <span class="seal__arrow" aria-hidden="true">↗</span>
+          </a>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+</body>
+</html>
