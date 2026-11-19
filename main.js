@@ -121,5 +121,34 @@
       gsap.to(els, { opacity: 1, y: 0, duration: 0.6, ease: "power2.out", stagger: 0.06, overwrite: true }),
   });
 
+  // ---------- 08. Sobre mí: parallax suave en las cuatro fotos ----------
+  document.querySelectorAll(".about__photos .ph").forEach((ph) => {
+    const speed = parseFloat(ph.dataset.speed || "0.08") * 100; // 6–12 %
+    gsap.fromTo(
+      ph.querySelector("img"),
+      { yPercent: -speed / 2, scale: 1 + speed / 100 },
+      {
+        yPercent: speed / 2,
+        ease: "none",
+        scrollTrigger: { trigger: ".about", start: "top bottom", end: "bottom top", scrub: true },
+      }
+    );
+  });
+
+  // ---------- 09. Contadores (años y "4° de 127") ----------
+  document.querySelectorAll(".count").forEach((el) => {
+    const to = parseInt(el.dataset.to, 10);
+    const from = to > 1000 ? to - 24 : 0;
+    const obj = { v: from };
+    el.textContent = from;
+    gsap.to(obj, {
+      v: to,
+      duration: 1.2,
+      ease: "power2.out",
+      onUpdate: () => (el.textContent = Math.round(obj.v)),
+      scrollTrigger: { trigger: el, start: "top 92%", once: true },
+    });
+  });
+
   window.addEventListener("load", () => ScrollTrigger.refresh());
 })();
