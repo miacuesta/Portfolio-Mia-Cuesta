@@ -47,6 +47,49 @@
   });
   gsap.from(".barizom", { rotate: 6, duration: 0.9, ease: "power3.out", delay: 0.26 });
 
+  // ---------- 02. Cinta de palabras ----------
+  const track = document.querySelector(".marquee__track");
+  const group = track.querySelector(".marquee__group");
+  let marquee = null;
+  const buildMarquee = () => {
+    // Medir con las fuentes ya cargadas; clonar hasta cubrir la pantalla + una vuelta extra
+    track.querySelectorAll(".marquee__group + .marquee__group").forEach((c) => c.remove());
+    const groupW = group.offsetWidth;
+    const copies = Math.max(2, Math.ceil(window.innerWidth / groupW) + 1);
+    for (let i = 1; i < copies; i++) {
+      const clone = group.cloneNode(true);
+      clone.setAttribute("aria-hidden", "true");
+      track.appendChild(clone);
+    }
+    if (marquee) marquee.kill();
+    // De izquierda a derecha: arranca corrido un grupo a la izquierda y avanza a 0
+    marquee = gsap.fromTo(track, { x: -groupW }, { x: 0, duration: 18, ease: "none", repeat: -1 });
+  };
+  (document.fonts ? document.fonts.ready : Promise.resolve()).then(buildMarquee);
+  let resizeTimer;
+  window.addEventListener("resize", () => { clearTimeout(resizeTimer); resizeTimer = setTimeout(buildMarquee, 200); });
+
+  let hoverSlow = 1;
+  let scrollBoost = 1;
+  const applySpeed = () => marquee && gsap.to(marquee, { timeScale: hoverSlow * scrollBoost, duration: 0.6, overwrite: true });
+  const marqueeEl = document.querySelector(".marquee");
+  marqueeEl.addEventListener("mouseenter", () => { hoverSlow = 0.25; applySpeed(); });
+  marqueeEl.addEventListener("mouseleave", () => { hoverSlow = 1; applySpeed(); });
+  let boostTimer;
+  ScrollTrigger.create({
+    onUpdate: (self) => {
+      const v = Math.abs(self.getVelocity());
+      scrollBoost = 1 + Math.min(v / 2500, 1.2);
+      applySpeed();
+      clearTimeout(boostTimer);
+      boostTimer = setTimeout(() => { scrollBoost = 1; applySpeed(); }, 160);
+    },
+  });
+
+  // ---------- 03. Sello giratorio: gira por CSS (12 s/vuelta), clic → #proyectos ----------
+
+  // ---------- 04. Botones: hover por CSS (250 ms ease-out) ----------
+
   // ---------- 07. Aparición al hacer scroll (cascada) ----------
   ScrollTrigger.batch(".reveal", {
     start: "top 90%",
