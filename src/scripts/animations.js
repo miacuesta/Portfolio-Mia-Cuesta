@@ -107,6 +107,13 @@ import Lenis from "lenis";
     delay: 0.1,
   });
   gsap.from(".barizom", { rotate: 6, duration: 0.9, ease: "power3.out", delay: 0.26 });
+  // El resto del inicio aparece al cargar (ya está en pantalla, no espera al scroll)
+  gsap.to(".hero .reveal", { opacity: 1, y: 0, duration: 0.6, ease: "power2.out", stagger: 0.08, delay: 0.45 });
+
+  // Al scrollear, el inicio se despide suave mientras sube la cinta
+  const heroScroll = { trigger: ".hero", start: "top top", end: "bottom top", scrub: true };
+  gsap.to(".hero__text", { yPercent: -12, opacity: 0.25, ease: "none", scrollTrigger: heroScroll });
+  gsap.to(".hero__media img", { scale: 1.08, ease: "none", scrollTrigger: { ...heroScroll } });
 
   // ---------- 02. Cinta de palabras ----------
   const track = document.querySelector(".marquee__track");
@@ -168,7 +175,7 @@ import Lenis from "lenis";
   // ---------- 06. Carpetas: entran en cascada con .reveal; al pasar el mouse se abren (CSS) ----------
 
   // ---------- 07. Aparición al hacer scroll (cascada) ----------
-  ScrollTrigger.batch(".reveal", {
+  ScrollTrigger.batch(".reveal:not(.hero .reveal)", {
     start: "top 90%",
     once: true,
     onEnter: (els) =>
