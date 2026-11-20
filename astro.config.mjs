@@ -1,8 +1,9 @@
 // @ts-check
 import { defineConfig } from "astro/config";
 
-// Publicado en GitHub Pages: https://miacuesta.github.io/Portfolio-Mia-Cuesta/
+// En Vercel el sitio se sirve desde la raíz del dominio ("/").
+// Solo para GitHub Pages hace falta la subcarpeta: construir con
+//   BASE_PATH=/Portfolio-Mia-Cuesta npm run build
 export default defineConfig({
-  site: "https://miacuesta.github.io",
-  base: "/Portfolio-Mia-Cuesta",
+  base: process.env.BASE_PATH || "/",
 });
